@@ -1,0 +1,41 @@
+﻿body {
+    margin: 0;
+    padding-top: 70px;
+    padding-bottom: 20px;
+    background-image: url('../images/back2.png');
+    background-repeat: repeat-x;
+}
+
+* {
+    font-family: Roboto,Helvetica Neue,sans-serif !important;
+}
+
+img{
+    max-width: 100%;
+}
+.md-headline{
+    font-size: 20px;
+}
+.pushup{
+    margin-top: 136px;
+}
+md-input-container{
+    margin-bottom: 0px;
+}
+.md-display-2 {
+    font-size: 1.5em;
+    font-weight: 400;
+    line-height: 30px;
+    margin-top: 10px;
+}
+.md-button{
+    padding: 0px 20px;
+}
+
+.mydate{
+    background-color: transparent;
+    border: none;
+    margin-top: 9px;
+    border-bottom: thin solid #dadada;
+    padding-bottom: 5px;
+}

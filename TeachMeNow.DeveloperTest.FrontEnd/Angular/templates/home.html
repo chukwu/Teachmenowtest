@@ -1,0 +1,155 @@
+﻿<div class="container pushup">
+    <div class="column col-xs-6 col-md-1 col-sm-2">
+        <img src="/images/logo.jpg" alt="Alternate Text" />
+    </div>
+    <div class="column col-xs-12 col-md-11 col-sm-10">
+        <div class="row">
+            <div class="col-sm-8">
+
+                <div ng-cloak>
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="View Sessions/Classes">
+                                <md-content class="md-padding">
+                                    <h1 class="md-display-2">Manage Sessions</h1>
+                                    <form ng-submit="submitsessionform()" name="userForm" layout="column" class="md-inline-form">
+                                        <div style="width: 100%;">
+                                            <md-input-container class="md-block" flex-gt-xs>
+                                                <label>Subject</label>
+                                                <input required ng-model="sessionformdata.Subject" type="text">
+                                            </md-input-container>
+                                            <md-input-container style="padding: 0px 0px 23px 0px;min-width: 300px;">
+                                                <label>Student</label>
+                                                <md-select required ng-model="sessionformdata.Student">
+                                                    <md-option ng-repeat="stud in home.users" value="{{stud.Id}}">
+                                                        {{stud.Name}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <md-input-container style="padding: 0px 0px 23px 0px;min-width: 300px;">
+                                                <label>Tutor</label>
+                                                <md-select required ng-model="sessionformdata.Tutor">
+                                                    <md-option ng-repeat="stud in home.teachers" value="{{stud.Id}}">
+                                                        {{stud.Name}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <div layout-gt-xs="row">
+                                                <div flex-gt-xs>
+                                                    <h5>Start Date</h5>
+                                                    <md-datepicker md-open-on-focus ng-model="sessionformdata.StartTime" md-placeholder="Start Date"></md-datepicker>
+                                                </div>
+                                                <div flex-gt-xs>
+                                                    <h5>Start Time</h5>
+                                                    <input format="hh:mm a" mdc-datetime-picker="" date="false" time="true" type="text" id="datetime"
+                                                           placeholder="Start Time" show-todays-date="" min-date="" ng-model="st" class="md-input mydate"
+                                                           readonly="readonly">
+                                                </div>
+                                            </div>
+
+                                            <div layout-gt-xs="row">
+                                                <div flex-gt-xs>
+                                                    <h5>End Date</h5>
+                                                    <md-datepicker md-open-on-focus ng-model="sessionformdata.EndTime" md-placeholder="End Date"></md-datepicker>
+                                                </div>
+                                                <div flex-gt-xs>
+                                                    <h5>End Time</h5>
+                                                    <input format="hh:mm a" mdc-datetime-picker="" date="false" time="true" type="text" id="datetime2"
+                                                           placeholder="End Time" show-todays-date="" min-date="" ng-model="et" class="md-input mydate"
+                                                           readonly="readonly">
+                                                </div>
+                                            </div>
+
+                                            <md-input-container class="md-block" flex-gt-xs style="margin: 0; margin-top: 20px;">
+                                                <md-button type="submit" style="margin: 0;" class="md-raised md-primary">Submit Now</md-button>
+                                            </md-input-container>
+
+                                        </div>
+                                    </form>
+
+                                    <hr />
+                                    <h4>Sessions</h4>
+                                    <md-list-item class="md-3-line" ng-repeat="item in home.sessions">
+                                        <img src="/images/student.svg" class="md-avatar"/>
+                                        <div class="md-list-item-text" layout="column">
+                                            <h3>{{ item.classes.Subject }} from {{item.classes.StartTime | date:'yyyy-MM-dd hh:mm'}} to from {{item.classes.EndTime | date:'yyyy-MM-dd hh:mm'}}</h3>
+                                            <h4>Student: {{ item.student.Name }}, ID: {{ item.student.Id }}</h4>
+                                            <p>Tutor: {{ item.tutor.Name }}, ID: {{ item.tutor.Id }}</p>
+
+                                            <md-button ng-click="deletesession(item.classes.Id)" style="margin: 0; margin-top:10px;" class="md-raised md-warn">Delete Record</md-button>
+                                            <md-button ng-click="reshedulesession(item.classes)" style="margin: 0; margin-top:10px;" class="md-raised md-primary">Reschedule</md-button>
+                                        </div>
+                                    </md-list-item>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="Add New User">
+                                <md-content class="md-padding">
+                                    <h1 class="md-display-2">Add User</h1>
+                                    <form ng-submit="submitform()" name="userForm" layout="column" class="md-inline-form">
+                                        <div style="width: 100%;">
+                                            <md-input-container>
+                                                <label>Name</label>
+                                                <input required ng-model="userformdata.Name" type="text">
+                                            </md-input-container>
+                                            <md-input-container style="padding: 0px 0px 23px 0px;min-width: 200px;">
+                                                <label>Type</label>
+                                                <md-select required ng-model="userformdata.IsTutor">
+                                                    <md-option ng-repeat="ut in usertypes" value="{{ut.bool}}">
+                                                        {{ut.text}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <md-input-container style="margin: 0;">
+                                                <md-button type="submit" style="margin: 0;" class="md-raised md-primary">Submit Now</md-button>
+                                            </md-input-container>
+
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </md-tab>
+
+                        </md-tabs>
+                    </md-content>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <md-content>
+                    <md-card class="stt">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">REGISTERED STUDENTS</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="user in home.users">
+                                <img src="/images/student.svg" class="md-avatar" alt="{{user.Name}}" />
+                                <div class="md-list-item-text" layout="column">
+                                    <h4>{{ user.Name }}</h4>
+                                    <h5><b>Is Tutor: </b>{{ user.IsTutor }}, <b>ID: </b>{{ user.Id }}</h5>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-card>
+                    <p><br/></p>
+                    <md-card class="tut">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">REGISTERED TUTORS</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="user in home.teachers">
+                                <img src="/images/teacher.svg" class="md-avatar" alt="{{user.Name}}" />
+                                <div class="md-list-item-text" layout="column">
+                                    <h4>{{ user.Name }}</h4>
+                                    <h5><b>Is Tutor: </b> {{ user.IsTutor }}, <b>ID: </b>{{ user.Id }}</h5>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-card>
+                 </md-content>
+            </div>
+        </div>
+
+    </div>
+</div>
